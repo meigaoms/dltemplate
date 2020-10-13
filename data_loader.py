@@ -147,6 +147,8 @@ class CoCoDataset(data.Dataset):
 
     def __len__(self):
         if self.mode == 'train':
-            return len(self.ids)[:1000]
+            # return len(self.ids)
+            return 1000
         else:
-            return len(self.paths)[:1000]
+            # return len(self.paths)
+            return 1000
