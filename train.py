@@ -78,38 +78,39 @@ for epoch in range(1, num_epochs+1):
     
     for i_step in range(1, total_step+1):
         
-        # Randomly sample a caption length, and sample indices with that length.
-        indices = data_loader.dataset.get_train_indices()
-        # Create and assign a batch sampler to retrieve a batch with the sampled indices.
-        new_sampler = data.sampler.SubsetRandomSampler(indices=indices)
-        data_loader.batch_sampler.sampler = new_sampler
+        # # Randomly sample a caption length, and sample indices with that length.
+        # indices = data_loader.dataset.get_train_indices()
+        # # Create and assign a batch sampler to retrieve a batch with the sampled indices.
+        # new_sampler = data.sampler.SubsetRandomSampler(indices=indices)
+        # data_loader.batch_sampler.sampler = new_sampler
         
-        # Obtain the batch.
-        images, captions = next(iter(data_loader))
+        # # Obtain the batch.
+        # images, captions = next(iter(data_loader))
 
-        # Move batch of images and captions to GPU if CUDA is available.
-        images = images.to(device)
-        captions = captions.to(device)
+        # # Move batch of images and captions to GPU if CUDA is available.
+        # images = images.to(device)
+        # captions = captions.to(device)
         
-        # Zero the gradients.
-        decoder.zero_grad()
-        encoder.zero_grad()
+        # # Zero the gradients.
+        # decoder.zero_grad()
+        # encoder.zero_grad()
         
-        # Pass the inputs through the CNN-RNN model.
-        features = encoder(images)
-        outputs = decoder(features, captions)
+        # # Pass the inputs through the CNN-RNN model.
+        # features = encoder(images)
+        # outputs = decoder(features, captions)
         
-        # Calculate the batch loss.
-        loss = criterion(outputs.view(-1, vocab_size), captions.view(-1))
+        # # Calculate the batch loss.
+        # loss = criterion(outputs.view(-1, vocab_size), captions.view(-1))
         
-        # Backward pass.
-        loss.backward()
+        # # Backward pass.
+        # loss.backward()
         
-        # Update the parameters in the optimizer.
-        optimizer.step()
+        # # Update the parameters in the optimizer.
+        # optimizer.step()
             
-        # Get training statistics.
-        stats = 'Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f' % (epoch, num_epochs, i_step, total_step, loss.item(), np.exp(loss.item()))
+        # # Get training statistics.
+        # stats = 'Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f' % (epoch, num_epochs, i_step, total_step, loss.item(), np.exp(loss.item()))
+        stats = 'Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f' % (epoch, num_epochs, i_step, total_step, i_step*0.1, i_step)
         
         # Print training statistics (on same line).
         print('\r' + stats, end="")
@@ -125,8 +126,12 @@ for epoch in range(1, num_epochs+1):
             
     # Save the weights.
     if epoch % save_every == 0:
-        torch.save(decoder.state_dict(), os.path.join('./models', 'decoder-%d.pkl' % epoch))
-        torch.save(encoder.state_dict(), os.path.join('./models', 'encoder-%d.pkl' % epoch))
+        try:
+            os.makedirs("OUTPUT/models/")
+        except:
+            pass
+        torch.save(decoder.state_dict(), os.path.join('OUTPUT/models', 'decoder-%d.pkl' % epoch))
+        torch.save(encoder.state_dict(), os.path.join('OUTPUT/models', 'encoder-%d.pkl' % epoch))
 
 # Close the training log file.
 f.close()
