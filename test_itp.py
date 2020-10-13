@@ -1,5 +1,6 @@
 import logging
 import os
+from azureml.core.run import Run
 
 logging.basicConfig(level=logging.DEBUG)
 # if __name__ == "__main__":
@@ -10,6 +11,6 @@ dataset = "DATASET"
 print("print dir", os.listdir(dataset))
 
 
-import mlflow
-with mlflow.start_run():
-    mlflow.log_metric("example", 1.23)
+run = Run.get_context()
+
+run.log('alpha', 1.23)
