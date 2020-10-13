@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.DEBUG)
 # if __name__ == "__main__":
 logging.info("This is from logging info %s", __file__)
 print("print results here")
-dataset = "DATASET/luna16"
+dataset = "DATASET"
 
 print("print dir", os.listdir(dataset))
 
