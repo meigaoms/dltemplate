@@ -22,7 +22,7 @@ hidden_size = 512          # number of features in hidden state of the RNN decod
 num_epochs = 1             # number of training epochs
 save_every = 1             # determines frequency of saving model weights
 print_every = 100          # determines window for printing average loss
-log_file = 'OUTtraining_log.txt'       # name of file with saved training loss and perplexity
+log_file = 'OUTPUT/training_log.txt'       # name of file with saved training loss and perplexity
 
 # (Optional) TODO #2: Amend the image transform below.
 transform_train = transforms.Compose([ 

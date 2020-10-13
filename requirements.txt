@@ -1,5 +1,6 @@
 # azureml-core
 # azureml-tensorboard
+azureml-mlflow
 opencv-python>=3.2.0.6
 jupyter>=1.0.0
 matplotlib>=2.1.1
