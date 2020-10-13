@@ -140,16 +140,13 @@ class CoCoDataset(data.Dataset):
             return orig_image, image
 
     def get_train_indices(self):
-        # sel_length = np.random.choice(self.caption_lengths)
-        sel_length = 1000
+        sel_length = np.random.choice(self.caption_lengths)
         all_indices = np.where([self.caption_lengths[i] == sel_length for i in np.arange(len(self.caption_lengths))])[0]
         indices = list(np.random.choice(all_indices, size=self.batch_size))
         return indices
 
     def __len__(self):
         if self.mode == 'train':
-            # return len(self.ids)
-            return 1000
+            return len(self.ids)
         else:
-            # return len(self.paths)
-            return 200
+            return len(self.paths)
